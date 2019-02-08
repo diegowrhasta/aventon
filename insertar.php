@@ -10,20 +10,27 @@
 
     switch ($key) {
         case 'registrarUsuario':
-            $correo=$_POST['correo'];
+            $ci=$_POST['ci'];
             $pass=$_POST['pass'];
-            $sql="INSERT  INTO usuario VALUES (default,'$correo','$pass')";
+            $nombre=$_POST['nombre'];
+            $apellido=$_POST['apellido'];
+            $fecha_nac=$_POST['fecha_nac'];
+            $estado='true';
+            $telf=$_POST['telf'];
+            $sql="INSERT  INTO usuarios VALUES ('$ci','$nombre','$apellido','$fecha_nac','$estado','$pass','$telf')";
             $result=mysqli_query($conexion,$sql);
             echo $result;
         break;
         case 'registrarAuto':
-            $correo=$_POST['correo'];
-            $pass=$_POST['pass'];
-            $sql="INSERT  INTO usuario VALUES (default,'$correo','$pass')";
+            $placa=$_POST['placa'];
+            $marca=$_POST['marca'];
+            $modelo=$_POST['modelo'];
+            $color=$_POST['color'];
+            $estado=$_POST['estado'];
+            $capacidad=$_POST['capacidad'];
+            $sql="INSERT  INTO autos VALUES ('$placa','$marca','$modelo','$color','$estado','$capacidad')";
             $result=mysqli_query($conexion,$sql);
             echo $result;
         break;
-
-        
     }    
 ?>
