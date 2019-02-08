@@ -24,9 +24,8 @@ foreign key(ci) references usuarios(ci),
 foreign key(placa) references autos(placa)
 );
 
-
 create table tiempo(
-t_id int,
+t_id int primary key,
 fecha date
 );
 create table ruta_programada(
@@ -127,11 +126,5 @@ calf double
 create table calif_pasajeros(
 usuario_id int primary key,
 calf double
-);
-
-create table tiempo(
-t_id int primary key,
-transaccion_id int,
-fecha date
 );
 
