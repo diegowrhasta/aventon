@@ -4,6 +4,7 @@ nombre varchar(45),
 apellido varchar(45),
 fecha_nac date,
 estado boolean,
+pass varchar(45),
 telf int
 );
 
