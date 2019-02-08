@@ -3,6 +3,7 @@ ci int primary key,
 nombre varchar(45),
 apellido varchar(45),
 fecha_nac date,
+estado boolean,
 telf int
 );
 
@@ -11,6 +12,7 @@ placa int primary key,
 marca varchar(45),
 modelo varchar(45),
 color varchar(45),
+estado boolean,
 capacidad int
 );
 
@@ -22,15 +24,20 @@ foreign key(ci) references usuarios(ci),
 foreign key(placa) references autos(placa)
 );
 
+
+create table tiempo(
+t_id int,
+fecha date
+);
 create table ruta_programada(
 rut_prog_id int primary key,
 user_auto_id int,
-fecha date,
+t_id int,
 estado boolean,
 calificacion double,
-foreign key(user_auto_id) references usuarios_autos(user_auto_id)
+foreign key(user_auto_id) references usuarios_autos(user_auto_id),
+foreign key(t_id) references tiempo(t_id)
 );
-
 
 create table ruta_prog_punto(
 id_rut_prog_punto int primary key,
@@ -45,6 +52,7 @@ punto_id int primary key,
 id_ruta int,
 lat double,
 longi double,
+estado boolean,
 foreign key(id_ruta) references ruta_prog_punto(id_rut_prog_punto)
 );
 
@@ -91,6 +99,7 @@ foreign key(pasajero_id) references integrantes(integrante_id)
 create table prendas(
 prenda_id int primary key,
 nombre_prenda varchar(25),
+estado boolean,
 color varchar(25)
 );
 
