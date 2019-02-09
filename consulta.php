@@ -11,7 +11,8 @@
     switch ($key) {
         case 'verificarExistenciaDeUsuarioPorCi':
             $ci=$_POST['ci'];
-            $sql="select ci,nombre,apellido from usuarios where ci=$ci";
+            $pass=$_POST['pass'];
+            $sql="select ci,nombre,apellido,pass from usuarios where ci=$ci and pass = BINARY '$pass'" ;
             $result=mysqli_query($conexion,$sql);
             if($result->num_rows > 0)
             {
