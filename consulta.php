@@ -11,15 +11,18 @@
     switch ($key) {
         case 'verificarExistenciaDeUsuarioPorCi':
             $ci=$_POST['ci'];
-            $sql="select ci,nombre,apellido from usuarios where ci=$ci;";
+            $sql="select ci,nombre,apellido from usuarios where ci=$ci";
             $result=mysqli_query($conexion,$sql);
-            $dato=mysqli_fetch_row($result);
-            if($dato[0]=="0"){
-                echo "No Existe";
-            }else{
-                echo "Existe";
+            if($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc()) {
+                    echo "ci: " . $row["ci"]. " - nombre: " . $row["nombre"]. " " . $row["apellido"]. "<br>";
+                }
             }
-            
+            else
+            {
+                echo "Not Found";  
+            }
         break;
     }    
 ?>
