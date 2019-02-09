@@ -1,5 +1,5 @@
 <?php
-
+    header("Access-Control-Allow-Origin: *");
     require_once "../Clases/Conexion.php"; 
     $c= new conectar();
     $conexion=$c->conexion();
@@ -12,7 +12,7 @@
         case 'registrarUsuario':
             $ci=$_POST['ci'];
             $pass=$_POST['pass'];
-            $nombre=$_POST['nombre'];
+            $nombre=$_POST['nombre'];   
             $apellido=$_POST['apellido'];
             $fecha_nac=$_POST['fecha_nac'];
             $estado='true';

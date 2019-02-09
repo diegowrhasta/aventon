@@ -1,5 +1,5 @@
 <?php 
-
+	header("Access-Control-Allow-Origin: *");
 	class conectar{
 		private $servidor="localhost";
 		private $usuario="root";
