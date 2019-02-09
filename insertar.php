@@ -17,11 +17,11 @@
         case 'registrarUsuario':
             $ci=filter_var($obj->ci, FILTER_SANITIZE_NUMBER_INT);
             $pass=filter_var($obj->pass, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-            $nombre=$_POST['nombre'];   
-            $apellido=$_POST['apellido'];
-            $fecha_nac=$_POST['fecha_nac'];
+            $nombre=filter_var($obj->nombre, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);   
+            $apellido=filter_var($obj->apellido, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $fecha_nac=filter_var($obj->fecha_nac, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $estado='true';
-            $telf=$_POST['telf'];
+            $telf=filter_var($obj->telf, FILTER_SANITIZE_NUMBER_INT);
             $sql="INSERT  INTO usuarios VALUES ('$ci','$nombre','$apellido','$fecha_nac','$estado','$pass','$telf')";
             $result=mysqli_query($conexion,$sql);
             echo json_encode(array('message' => $result));
