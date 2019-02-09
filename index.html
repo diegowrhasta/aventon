@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRUEBA</title>
+    <script src="librerias/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <form id=form>
+        <label for="ci">CI: </label>
+        <input type="text" id="ci" name="ci" value="">
+        <br><br>
+        <input type="button" id="boton" value="Buscar">
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+
+        $('#boton').click(function(){
+            
+            datos=$('#form').serialize();
+            $.ajax({
+                type:"POST",
+                data:datos+"&key=verificarExistenciaDeUsuarioPorCi",
+                url:"Procesos/consulta.php",
+                success:function(r){
+                    console.log(r);
+                }
+            });
+        });   
+    });
+</script>
