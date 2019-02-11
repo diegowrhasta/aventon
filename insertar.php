@@ -12,7 +12,7 @@
     $key = strip_tags($obj->key);
     // hacemos un switch para determinar la accion
     
-
+    
     switch ($key) {
         case 'registrarUsuario':
             $ci=filter_var($obj->ci, FILTER_SANITIZE_NUMBER_INT);
@@ -20,16 +20,16 @@
             $nombre=filter_var($obj->nombre, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $apellido=filter_var($obj->apellido, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $fecha_nac=filter_var($obj->fecha_nac, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-            $estado=filter_var($obj->estado, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-            $telf=filter_var($obj->telf, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $estado=false;
+            $telf=filter_var($obj->telf, FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_ENCODE_LOW);
             $sql="INSERT  INTO usuarios VALUES ('$ci','$nombre','$apellido','$fecha_nac','$estado','$pass','$telf')";
             $result=mysqli_query($conexion,$sql);
             if($result==1){
                 $respuesta=array(
                     'message' => 'OK',
-                    'ci' => '$ci',
-                    'nombre' => '$nombre',
-                    'apellido' => '$apellido'
+                    'ci' => $ci,
+                    'nombre' => $nombre,
+                    'apellido' => $apellido
                 );
                 echo json_encode($respuesta);
             }else{
