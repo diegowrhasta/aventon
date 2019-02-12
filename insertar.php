@@ -39,15 +39,42 @@
             
         break;
         case 'registrarAuto':
-            $placa=$_POST['placa'];
-            $marca=$_POST['marca'];
-            $modelo=$_POST['modelo'];
-            $color=$_POST['color'];
-            $estado=$_POST['estado'];
-            $capacidad=$_POST['capacidad'];
-            $sql="INSERT  INTO autos VALUES ('$placa','$marca','$modelo','$color','$estado','$capacidad')";
+            $placa=filter_var($obj->placa, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $marca=filter_var($obj->marca, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $modelo=filter_var($obj->modelo, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $color=filter_var($obj->color, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $estado=false;
+            $capacidad=filter_var($obj->capacidad, FILTER_SANITIZE_NUMBER_INT);
+            $ci=filter_var($obj->id_usuario, FILTER_SANITIZE_NUMBER_INT);
+            $maletera=filter_var($obj->maletera, FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_ENCODE_LOW);
+            $sql="INSERT  INTO autos VALUES ('$placa','$marca','$modelo','$color','$estado','$capacidad','$maletera')";
             $result=mysqli_query($conexion,$sql);
-            echo $result;
+            if($result==1){
+                $respuesta=array(
+                    'message' => 'OK',
+                    'placa' => $placa,
+                    'capacidad' => $capacidad,
+                    'maletera' => $maletera
+                );
+                echo json_encode($respuesta);
+            }else{
+                echo json_encode(array('message' => 'Fallo'));
+            }
+        break;
+case 'intermedia':
+            $placa=filter_var($obj->placa, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $ci=filter_var($obj->ci, FILTER_SANITIZE_NUMBER_INT);
+	    $sql="INSERT  INTO usuarios_autos VALUES ('$ci','$placa')";
+	    $result=mysqli_query($conexion,$sql);
+            if($result==1){
+                $respuesta=array(
+                    'message' => 'OK',
+                    'placa' => $placa
+                );
+                echo json_encode($respuesta);
+            }else{
+                echo json_encode(array('message' => 'Fallo'));
+            }
         break;
     }    
 ?>
